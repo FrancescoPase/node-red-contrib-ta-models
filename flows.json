@@ -1,0 +1,223 @@
+[
+    {
+        "id": "9c6171601d05db27",
+        "type": "subflow",
+        "name": "Parallel HTwin",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 313.5174560546875,
+                "y": 234.66041564941406,
+                "wires": [
+                    {
+                        "id": "6cc7b8534368f43d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 876.5523681640625,
+                "y": 233.03102111816406,
+                "wires": [
+                    {
+                        "id": "818f3c392f73e6b6",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 819.0523681640625,
+                "y": 125.03102111816406,
+                "wires": [
+                    {
+                        "id": "87dff54fc6bbec60",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {
+            "module": "node-red-contrib-ta-models",
+            "type": "HTwin",
+            "version": "0.0.1",
+            "author": "Francesco Pase <francesco.pase@newtwen.com>",
+            "keywords": "node-red, htwin",
+            "license": "GPL-3.0"
+        },
+        "color": "#DDAA99"
+    },
+    {
+        "id": "bc9355c0dc288a79",
+        "type": "group",
+        "z": "9c6171601d05db27",
+        "name": "THERMAL",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "6cc7b8534368f43d",
+            "c9ec56eaf3168bce",
+            "cc48e4c2725cb0f3",
+            "2e2abb04331d990e",
+            "818f3c392f73e6b6",
+            "712eec2ce32ca061",
+            "87dff54fc6bbec60"
+        ],
+        "env": [
+            {
+                "name": "module_class",
+                "value": "HTwin",
+                "type": "str"
+            },
+            {
+                "name": "module_id",
+                "value": "Thermal",
+                "type": "str"
+            }
+        ],
+        "x": 301.5174560546875,
+        "y": 300.6604309082031,
+        "w": 608.034912109375,
+        "h": 168.32081604003906
+    },
+    {
+        "id": "6cc7b8534368f43d",
+        "type": "function",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "name": ".",
+        "func": "var module_info = {\n    module_class: env.get(\"module_class\"),\n    module_id: env.get(\"module_id\"),\n};\nmsg['module_info'] = module_info;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 342.5174560546875,
+        "y": 374.66041564941406,
+        "wires": [
+            [
+                "712eec2ce32ca061"
+            ]
+        ],
+        "icon": "font-awesome/fa-info-circle",
+        "l": false
+    },
+    {
+        "id": "cc48e4c2725cb0f3",
+        "type": "thermal_rom",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "model_dir": "",
+        "x": 545.3507690429688,
+        "y": 427.9812469482422,
+        "wires": [
+            [
+                "2e2abb04331d990e"
+            ]
+        ]
+    },
+    {
+        "id": "2e2abb04331d990e",
+        "type": "join",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "name": "Combine Exit",
+        "mode": "custom",
+        "build": "merged",
+        "property": "from_id_list",
+        "propertyType": "msg",
+        "key": "from_id_list",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 640.0523681640625,
+        "y": 374.03102111816406,
+        "wires": [
+            [
+                "87dff54fc6bbec60"
+            ]
+        ],
+        "icon": "font-awesome/fa-sign-out",
+        "l": false
+    },
+    {
+        "id": "818f3c392f73e6b6",
+        "type": "module_exit_config",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "x": 868.5523681640625,
+        "y": 374.031005859375,
+        "wires": [
+            []
+        ],
+        "icon": "node-red/link-out.svg",
+        "l": false
+    },
+    {
+        "id": "712eec2ce32ca061",
+        "type": "function",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "name": "INIT",
+        "func": "var init_info = {\n    flow_level: 0,\n};\nmsg['from_id_list'] = {\n    'init_node': init_info\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 392.0523681640625,
+        "y": 374.03102111816406,
+        "wires": [
+            [
+                "cc48e4c2725cb0f3",
+                "c9ec56eaf3168bce"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "87dff54fc6bbec60",
+        "type": "sum_node",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "x": 763,
+        "y": 372,
+        "wires": [
+            [
+                "818f3c392f73e6b6"
+            ]
+        ]
+    },
+    {
+        "id": "c9ec56eaf3168bce",
+        "type": "ffn_model",
+        "z": "9c6171601d05db27",
+        "g": "bc9355c0dc288a79",
+        "input_dim": "5",
+        "output_dim": "3",
+        "hidden_activation": "Linear",
+        "output_activation": "Linear",
+        "num_neuron_list": "2, 3, 4",
+        "p_dropout_list": "",
+        "loss_scale_list": "",
+        "x": 541.5174560546875,
+        "y": 341.6604309082031,
+        "wires": [
+            [
+                "2e2abb04331d990e"
+            ]
+        ]
+    }
+]
