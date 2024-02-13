@@ -2,7 +2,7 @@ name: Release Node-RED node
 on:
   push:
     branches: 
-      -master
+      -main
 jobs:
   release-on-push:
     runs-on: ubuntu-latest
