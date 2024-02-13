@@ -1,4 +1,4 @@
-name: Release Node-RED node
+name: Release Node-RED node on push
 on:
   push:
     branches: 
