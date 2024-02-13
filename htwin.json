@@ -4,7 +4,7 @@
         "type": "subflow",
         "name": "Parallel HTwin",
         "info": "",
-        "category": "",
+        "category": "HTwins",
         "in": [
             {
                 "x": 313.5174560546875,
@@ -40,7 +40,7 @@
         ],
         "env": [],
         "meta": {
-            "module": "node-red-contrib-ta-models",
+            "module": "node-red-contrib-twin-analytica",
             "type": "HTwin",
             "version": "0.0.1",
             "author": "Francesco Pase <francesco.pase@newtwen.com>",

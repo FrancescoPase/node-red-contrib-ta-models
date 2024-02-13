@@ -1,0 +1,13 @@
+[
+    {
+        "id": "6d858d5f994635e1",
+        "type": "thermal_rom",
+        "z": "0ac09a4d8f9bf875",
+        "model_dir": "",
+        "x": 946,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]
