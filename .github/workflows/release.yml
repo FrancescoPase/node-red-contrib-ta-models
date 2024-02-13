@@ -1,10 +1,9 @@
-name: Release Node-RED node on push
+name: Release Node-RED node
 on:
-  push:
-    branches: 
-      -main
+  release:
+    types: [created]
 jobs:
-  release-on-push:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
